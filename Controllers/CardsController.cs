@@ -5,7 +5,7 @@ namespace TimesUp.Controllers
 {
     public static class State
     {
-        public static IList<string> RemainingCards { get; set; } = new List<string>
+        public static List<string> RemainingCards { get; set; } = new List<string>
         {
             "Test",
             "Test1",
@@ -26,9 +26,9 @@ namespace TimesUp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(IList<string> newState)
+        public IActionResult Post(List<string> lines)
         {
-            State.RemainingCards = newState;
+            State.RemainingCards = lines;
             return Ok();
         }
     }
