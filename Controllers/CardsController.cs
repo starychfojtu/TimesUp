@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TimesUp.Controllers
@@ -26,9 +29,15 @@ namespace TimesUp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(List<string> lines)
+        public IActionResult Post()
         {
-            State.RemainingCards = lines;
+            using (var reader = new StreamReader(Request.Body))
+            {
+                var body = reader.ReadToEnd();
+                var items = JsonSerializer.Deserialize<List<string>>(body);
+                State.RemainingCards = items;
+            }
+            
             return Ok();
         }
     }
