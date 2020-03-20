@@ -46,6 +46,7 @@ namespace TimesUp
 
             app.UseAuthorization();
 
+            app.UseCors(b => b.AllowAnyOrigin());
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
